@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div class="sidebar">
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="profile">
+                <div class="profile-information">
+                    <p>@User.Identity.GetUserName()</p>
+                </div>
+            </div>
+            <div class="profile-more">
+                <a>@Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "profile-more-box" })</a>
+            </div>
+            <div class="logout">
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="logout-box">Log out</a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="profile-more">
+            <a>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "profile-more-box" })</a>
+        </div>
+    }
+</div>
